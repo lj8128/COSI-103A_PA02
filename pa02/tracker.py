@@ -91,6 +91,14 @@ def process_choice(choice):
         desc = input("description: ")
         trns = {'itemNum':itemNum, 'amount':amount, 'category':category_, 'date':date, 'desc':desc}
         transactions.add(trns)
+    elif choice == "9":
+        trns = transactions.summarize_transactions_by_year()
+        print_group_by_transactions(trns, "year")
+    elif choice == "10":
+        trns = transactions.summarize_transactions_by_category()
+        print_group_by_transactions(trns, "category")
+    elif choice == "11":
+        print(menu)
     else:
         print("choice",choice,"not yet implemented")
 
@@ -124,6 +132,19 @@ def print_transactions(items):
     for item in items:
         values = tuple(item.values()) 
         print("%-3d %-10d %-10s %-10s %-10s %-30s"%values)
+
+def print_group_by_transactions(items, type):
+    ''' print the transactions '''
+    if len(items)==0:
+        print('no items to print')
+        return
+    print('\n')
+    print("%-10s %-10s"%(
+        type, 'amount'))
+    print('-'*60)
+    for item in items:
+        values = tuple(item.values())
+        print("%-10s %-10d"%values)
 
 def print_category(cat):
     print("%-3d %-10s %-30s"%(cat['rowid'],cat['name'],cat['desc']))
