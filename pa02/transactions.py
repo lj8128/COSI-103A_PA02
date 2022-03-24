@@ -3,12 +3,14 @@ Transacation module
 """
 import sqlite3
 
+#Alex Romer
 def to_trns_dict(trns_tuple):
     ''' trns is a transaction tuple (rowid, itemNum, amount, category, date, description)'''
     trns = {'rowid':trns_tuple[0], 'itemNum':trns_tuple[1], 'amount':trns_tuple[2],
             'category':trns_tuple[3], 'date':trns_tuple[4], 'description':trns_tuple[5]}
     return trns
 
+#Alex Romer
 def to_trns_dict_list(trns_tuples):
     ''' convert a list of category tuples into a list of dictionaries'''
     return [to_trns_dict(trn) for trn in trns_tuples]
@@ -26,6 +28,7 @@ def to_dict_group_by_list(transcation_tuples, type):
 
 
 class Transaction:
+    #Alex Romer
     ''' transaction class definition'''
     def __init__(self, filename):
         self.filename = filename
@@ -36,6 +39,7 @@ class Transaction:
         con.commit()
         con.close()
 
+    #Alex Romer
     def select_all(self):
         ''' return all of the transactions as a list of dicts.'''
         con= sqlite3.connect(self.filename)
@@ -44,9 +48,9 @@ class Transaction:
         tuples = cur.fetchall()
         con.commit()
         con.close()
-        print(to_trns_dict_list(tuples))
         return to_trns_dict_list(tuples)
 
+    #Alex Romer
     def add(self,item):
         ''' add a transaction to the transactions table.
             this returns the rowid of the inserted element
