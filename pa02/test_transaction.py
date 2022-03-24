@@ -28,6 +28,17 @@ def med_db(empty_db):
     id3 = empty_db.add(t4)
     yield empty_db
 
+#Alex Romer
+@pytest.mark.simple
+def test_select_all(med_db):
+    trans = med_db.select_all()
+    trans_list = [{"rowid":1,"itemNum":1, "amount":20, "category":'food', "date":"2020-11-20", "description":'I love food'},
+                  {"rowid":2,"itemNum":2, "amount":10, "category":'food', "date":"2020-11-20", "description":'food is good'},
+                  {"rowid":3,"itemNum":3, "amount":30, "category":'drink', "date":"2010-11-20", "description":'I love drink'},
+                  {"rowid":4,"itemNum":4, "amount":40, "category":'drink', "date":"2010-11-20", "description":'drink is good'}]
+    for i in range(len(trans)):
+        assert trans_list[i] == trans[i]
+
 #Meng-Ku Chen
 @pytest.mark.simple
 def test_to_dict_group_by():
