@@ -10,15 +10,15 @@ class Transaction:
         con.commit()
         con.close()
 
-    def add(filename,itemNum,amount,category,data,description):
+    def add(self,item):
         ''' add a transaction to the transactions table.
             this returns the rowid of the inserted element
         '''
-        con = sqlite3.connect(filename)
+        con = sqlite3.connect(self.filename)
         cur = con.cursor()
         cur.execute(''' INSERT INTO transcations 
                         VALUES (?,?,?,?,?)''',
-                        (itemNum, amount, category, data, description))
+                        (item['itemNum'], item['amount'], category['category'], data['data'], description['description']))
         con.commit()
         cur.execute("SELECT last_insert_rowid()")
         last_rowid = cur.fetchone()
