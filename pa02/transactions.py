@@ -15,7 +15,7 @@ class Transaction:
         con = sqlite3.connect(filename)
         cur = con.cursor()
         cur.execute('''CREATE TABLE IF NOT EXISTS transactions
-                    (itemNum int, amount float, category text, date text, description text)''')
+                    (itemNum int, amount float, category text, date int, description text)''')
         con.commit()
         con.close()
     

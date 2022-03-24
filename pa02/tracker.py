@@ -33,10 +33,12 @@ could be replaced with PostgreSQL or Pandas or straight python lists
 
 #from transactions import Transaction
 from category import Category
+from transactions import Transaction
 import sys
 
 #transactions = Transaction('tracker.db')
 category = Category('tracker.db')
+transactions = Transaction('tracker.db')
 
 
 # here is the menu for the tracker app
@@ -78,6 +80,17 @@ def process_choice(choice):
         desc = input("new category description: ")
         cat = {'name':name, 'desc':desc}
         category.update(rowid,cat)
+    elif choice=='4':
+        trns = transactions.select_all()
+        print_transactions(trns)
+    elif choice =='5':
+        itemNum = input("item #: ")
+        amount = input("amount: ")
+        category_ = input("category: ")
+        date = input("date: ")
+        desc = input("description: ")
+        trns = {'itemNum':itemNum, 'amount':amount, 'category':category_, 'date':date, 'desc':desc}
+        transactions.add(trns)
     else:
         print("choice",choice,"not yet implemented")
 
@@ -105,12 +118,12 @@ def print_transactions(items):
         print('no items to print')
         return
     print('\n')
-    print("%-10s %-10d %-10s %-10d %-30s"%(
-        'item #','amount','category','date','description'))
-    print('-'*40)
+    print("%-3s %-10s %-10s %-10s %-10s %-30s"%(
+        'id','item #','amount','category','date','description'))
+    print('-'*60)
     for item in items:
         values = tuple(item.values()) 
-        print("%-10s %-10d %-10s %-10d %-30s"%values)
+        print("%-3d %-10d %-10s %-10s %-10s %-30s"%values)
 
 def print_category(cat):
     print("%-3d %-10s %-30s"%(cat['rowid'],cat['name'],cat['desc']))
