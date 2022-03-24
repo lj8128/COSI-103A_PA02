@@ -1,17 +1,20 @@
 import pytest
 from transactions import Transaction, to_dict_group_by, to_dict_group_by_list
 
+#Meng-Ku Chen
 @pytest.fixture
 def dbfile(tmpdir):
     ''' create a database file in a temporary file system '''
     return tmpdir.join('test_tracker.db')
 
+#Meng-Ku Chen
 @pytest.fixture
 def empty_db(dbfile):
     ''' create an empty database '''
     db = Transaction(dbfile)
     yield db
 
+#Meng-Ku Chen
 @pytest.fixture
 def med_db(empty_db):
     ''' create a small database, and tear it down later'''
@@ -25,6 +28,7 @@ def med_db(empty_db):
     id3 = empty_db.add(t4)
     yield empty_db
 
+#Meng-Ku Chen
 @pytest.mark.simple
 def test_to_dict_group_by():
     ''' teting the to_dict_group_by function '''
@@ -33,6 +37,7 @@ def test_to_dict_group_by():
     assert a['amount']== 30
     assert len(a.keys())== 2
 
+#Meng-Ku Chen
 @pytest.mark.simple
 def test_to_dict_group_by_list():
     ''' teting the to_dict_group_by_list function '''
@@ -41,6 +46,7 @@ def test_to_dict_group_by_list():
     assert a[0]['amount']== 30
     assert len(a[0].keys()) == 2
 
+#Meng-Ku Chen
 @pytest.mark.simple
 def test_summarize_transactions_by_year(med_db):
     ''' test summarize_transactions_by_year '''
@@ -55,6 +61,7 @@ def test_summarize_transactions_by_year(med_db):
     assert t2['amount'] == 30
     assert len(t1.keys()) == 2
 
+#Meng-Ku Chen
 @pytest.mark.simple
 def test_summarize_transactions_by_category(med_db):
     ''' test summarize_transactions_by_year '''
