@@ -26,7 +26,7 @@ In place of SQL queries, we will have method calls.
 
 This app will store the data in a SQLite database ~/tracker.db
 
-Note the actual implementation of the ORM is hidden and so it 
+Note the actual implementation of the ORM is hidden and so it
 could be replaced with PostgreSQL or Pandas or straight python lists
 
 '''
@@ -34,7 +34,6 @@ could be replaced with PostgreSQL or Pandas or straight python lists
 #from transactions import Transaction
 from category import Category
 from transactions import Transaction
-import sys
 
 #transactions = Transaction('tracker.db')
 category = Category('tracker.db')
@@ -43,7 +42,7 @@ transactions = Transaction('tracker.db')
 
 # here is the menu for the tracker app
 
-menu = '''
+MENU = '''
 0. quit
 1. show categories
 2. add category
@@ -62,8 +61,8 @@ menu = '''
 
 
 def process_choice(choice):
-
-    if choice=='0':
+    """process choice"""
+    if choice =='0':
         return
     elif choice=='1':
         cats = category.select_all()
@@ -84,12 +83,12 @@ def process_choice(choice):
         trns = transactions.select_all()
         print_transactions(trns)
     elif choice =='5':
-        itemNum = input("item #: ")
+        item_num = input("item #: ")
         amount = input("amount: ")
         category_ = input("category: ")
         date = input("date: ")
         desc = input("description: ")
-        trns = {'itemNum':itemNum, 'amount':amount, 'category':category_, 'date':date, 'desc':desc}
+        trns = {'itemNum':item_num, 'amount':amount, 'category':category_, 'date':date, 'desc':desc}
         transactions.add(trns)
     elif choice == "9":
         trns = transactions.summarize_transactions_by_year()
@@ -98,19 +97,17 @@ def process_choice(choice):
         trns = transactions.summarize_transactions_by_category()
         print_group_by_transactions(trns, "category")
     elif choice == "11":
-        print(menu)
+        print(MENU)
     else:
         print("choice",choice,"not yet implemented")
 
     choice = input("> ")
-    return(choice)
+    return choice
 
 
 def toplevel():
     ''' handle the user's choice '''
-
-    ''' read the command args and process them'''
-    print(menu)
+    print(MENU)
     choice = input("> ")
     while choice !='0' :
         choice = process_choice(choice)
@@ -126,30 +123,33 @@ def print_transactions(items):
         print('no items to print')
         return
     print('\n')
-    print("%-3s %-10s %-10s %-10s %-10s %-30s"%(
+    print("%-3s %-10s %-10s %-10s %-10s %-30s" %(
         'id','item #','amount','category','date','description'))
     print('-'*60)
     for item in items:
-        values = tuple(item.values()) 
+        values = tuple(item.values())
         print("%-3d %-10d %-10s %-10s %-10s %-30s"%values)
 
-def print_group_by_transactions(items, type):
+#Meng-Ku Chen
+def print_group_by_transactions(items, t):
     ''' print the transactions '''
     if len(items)==0:
         print('no items to print')
         return
     print('\n')
     print("%-10s %-10s"%(
-        type, 'amount'))
+        t, 'amount'))
     print('-'*60)
     for item in items:
         values = tuple(item.values())
         print("%-10s %-10d"%values)
 
 def print_category(cat):
+    ''' print the category '''
     print("%-3d %-10s %-30s"%(cat['rowid'],cat['name'],cat['desc']))
 
 def print_categories(cats):
+    ''' print categories '''
     print("%-3s %-10s %-30s"%("id","name","description"))
     print('-'*45)
     for cat in cats:
@@ -159,4 +159,3 @@ def print_categories(cats):
 # here is the main call!
 
 toplevel()
-
