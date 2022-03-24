@@ -90,6 +90,15 @@ def process_choice(choice):
         desc = input("description: ")
         trns = {'itemNum':item_num, 'amount':amount, 'category':category_, 'date':date, 'desc':desc}
         transactions.add(trns)
+    elif choice =='6':
+        itemNum = input("item#: ")
+        transactions.delete(itemNum)
+    elif choice =='7':
+        trns = transactions.summarize_transactions_by_date()
+        print_group_by_transactions(trns, "date")
+    elif choice == '8':
+        trns = transactions.summarize_transactions_by_month()
+        print_group_by_transactions(trns, "month")
     elif choice == "9":
         trns = transactions.summarize_transactions_by_year()
         print_group_by_transactions(trns, "year")

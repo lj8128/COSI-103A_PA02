@@ -88,3 +88,37 @@ class Transaction:
         con.commit()
         con.close()
         return to_dict_group_by_list(tuples, "category")
+
+    def delete(self, numOfItem):
+        con = sqlite3.connect(self.filename)
+        cur = con.cursor()
+        delete_stmt = "DELETE FROM transactions WHERE itemNum = ?"
+        cur.execute(delete_stmt, (numOfItem,))
+        con.commit()
+        con.close()
+
+    def summarize_transactions_by_date(self):
+        con = sqlite3.connect(self.filename)
+        cur = con.cursor()
+        cur.execute('''SELECT date, SUM(amount) as amount FROM transactions"
+                    "GROUP BY date''')
+        tuples = cur.fetchall()
+        con.commit()
+        con.close()
+        print(to_dict_group_by_list(tuples, "date"))
+        return to_dict_group_by_list(tuples, "date")
+
+    def summarize_transactions_by_month(self):
+        con = sqlite3.connect(self.filename)
+        cur = con.cursor()
+        cur.execute('''SELECT strftime('%m', date), SUM(amount) as amount FROM transactions"
+                    "GROUP BY strftime('%m', date)''')
+        tuples = cur.fetchall()
+        con.commit()
+        con.close()
+        print(to_dict_group_by_list(tuples, "month"))
+        return to_dict_group_by_list(tuples, "month")
+
+
+    
+
