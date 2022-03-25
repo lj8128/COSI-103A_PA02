@@ -122,6 +122,79 @@ Script done on Thu Mar 24 15:16:20 2022
 
 ```
 
+#Alex Romer
+```bash
+Script started on 2022-03-24 02:46:09-04:00 [TERM="xterm-256color" TTY="/dev/pts/3" COLUMNS="192" LINES="15"]
+[?2004h(base) ]0;alex@mx: ~/103a_PA2/COSI-103A_PA02/pa02[1;35malex[0m@[1;36mmx[0m:[1;32m~/103a_PA2/COSI-103A_PA02/pa02[0m
+
+[1;32m$[0m python3 tracker.py
+[?2004l
+
+0. quit
+1. show categories
+2. add category
+3. modify category
+4. show transactions
+5. add transaction
+6. delete transaction
+7. summarize transactions by date
+8. summarize transactions by month
+9. summarize transactions by year
+10. summarize transactions by category
+11. print this menu
+
+> 5
+item #: 1 20
+amount: 35
+category: Entertainment
+date: 12202021
+description: Something fun
+> 5
+item #: 13
+amount: 42
+category: Books
+date: 03252022
+description: A book
+> 4
+
+
+id  item #     amount     category   date       description                   
+------------------------------------------------------------
+1   20         35.0       Entertainment 12202021   Something fun                 
+2   13         42.0       Books      3252022    A book                        
+> 0
+bye
+[?2004h(base) ]0;alex@mx: ~/103a_PA2/COSI-103A_PA02/pa02[1;35malex[0m@[1;36mmx[0m:[1;32m~/103a_PA2/COSI-103A_PA02/pa02[0m
+
+[1;32m$[0m pytest -v
+[?2004l
+[1m===================================================================================== test session starts ======================================================================================[0m
+platform linux -- Python 3.9.5, pytest-6.2.5, py-1.9.0, pluggy-0.12.0 -- /home/alex/miniconda3/bin/python
+cachedir: .pytest_cache
+rootdir: /home/alex/103a_PA2/COSI-103A_PA02/pa02, configfile: pytest.ini
+plugins: anyio-3.5.0
+[1mcollecting ... [0m[1m
+collected 9 items                                                                                                                                                                              [0m
+
+test_category.py::test_to_cat_dict [32mPASSED[0m[32m                                                                                                                                                [ 11%][0m
+test_category.py::test_add [32mPASSED[0m[32m                                                                                                                                                        [ 22%][0m
+test_category.py::test_delete [32mPASSED[0m[32m                                                                                                                                                     [ 33%][0m
+test_category.py::test_update [32mPASSED[0m[32m                                                                                                                                                     [ 44%][0m
+test_transaction.py::test_select_all [32mPASSED[0m[32m                                                                                                                                              [ 55%][0m
+test_transaction.py::test_to_dict_group_by [32mPASSED[0m[32m                                                                                                                                        [ 66%][0m
+test_transaction.py::test_to_dict_group_by_list [32mPASSED[0m[32m                                                                                                                                   [ 77%][0m
+test_transaction.py::test_summarize_transactions_by_year [32mPASSED[0m[32m                                                                                                                          [ 88%][0m
+test_transaction.py::test_summarize_transactions_by_category [32mPASSED[0m[32m                                                                                                                      [100%][0m
+
+[32m====================================================================================== [32m[1m9 passed[0m[32m in 0.49s[0m[32m =======================================================================================[0m
+[?2004h(base) ]0;alex@mx: ~/103a_PA2/COSI-103A_PA02/pa02[1;35malex[0m@[1;36mmx[0m:[1;32m~/103a_PA2/COSI-103A_PA02/pa02[0m
+
+[1;32m$[0m exit
+[?2004l
+exit
+
+Script done on 2022-03-24 02:47:55-04:00 [COMMAND_EXIT_CODE="0"]
+```
 
 
 
